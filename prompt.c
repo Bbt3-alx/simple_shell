@@ -6,7 +6,7 @@
  */
 int prompt(void)
 {
-	char str_prompt[] = "($) ";
+	char str_prompt[] = "#cisfun$ ";
 	int len;
 
 	len = write(STDOUT_FILENO, &str_prompt, strlen(str_prompt));
