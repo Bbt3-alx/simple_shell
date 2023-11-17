@@ -21,6 +21,7 @@ void read_cmd(char ***tokens, int *cmd_size, int *i)
 		if (feof(stdin))
 		{
 			/* CTRL-D was pressed, exit the program */
+			write(STDOUT_FILENO, "\n", 1);
 			free_tokens(*tokens, *i);
 			exit(0);
 		}
