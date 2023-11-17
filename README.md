@@ -1,4 +1,4 @@
-LX Simple Shell Project
+## ALX Simple Shell Project
 
 ## Introduction
 This project is a simple shell implementation written in C, providing a concise command-line user interface for Unix-like operating systems.
