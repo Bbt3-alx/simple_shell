@@ -1,18 +1,36 @@
 #include "shell.h"
 /**
  * tokenize_input - Tokenize the commande from the user
- * @line: The user input will be stored in this variable
- * @cmd_size: The size of the array of tokens
- * Return: Nothing.
+ * Return: The tokenized cmd.
  */
-char **tokenize_input(char *line, int cmd_size)
+char **tokenize_input()
 {
-	/* Tokenize the command */
+	/* Variable declaration */
+	char *line = NULL;
 	char *token = NULL;
 	char **tokens = NULL;
+	ssize_t cmd_size = 0;
+	size_t size = 0;
 	int i = 0;
 
-	tokens = (char **)malloc((cmd_size + 1) * sizeof(char *));
+	cmd_size = getline(&line, &size, stdin);
+	if (cmd_size == -1)
+	{
+		if (feof(stdin))
+		{
+			free(line);
+			/* write(STDOUT_FILENO, "\n", 1); */
+			exit(0);
+			return (NULL);
+		}
+		else
+		{
+			perror("getline");
+			exit(1);
+		}
+	}
+	/* Allocate memory for tokens */
+	tokens = malloc((cmd_size + 1) * sizeof(char *));
 	if (tokens == NULL)
 	{
 		perror("malloc");
@@ -29,15 +47,16 @@ char **tokenize_input(char *line, int cmd_size)
 		if (tokens[i] == NULL)
 		{
 			perror("malloc");
-			free_tokens(tokens, i);
-			free(line);
-			return (NULL); /* Handle error gracefully */
+			free_tokens(tokens);
+			return (NULL);
 		}
-		strncpy(tokens[i], token, strlen(token) + 1);
+		strcpy(tokens[i], token);
 		i++;
 		token = strtok(NULL, " ");
 	}
-	tokens[i] = NULL; /* Append NULL at the end */
+	if (i > 0)
+		tokens[i - 1][strlen(tokens[i - 1]) - 1] = '\0'; /* remove the new line */
 
+	free(line);
 	return (tokens);
 }

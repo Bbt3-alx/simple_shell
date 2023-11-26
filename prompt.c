@@ -8,6 +8,7 @@ int prompt(void)
 {
 	char str_prompt[] = "$ ";
 	int len;
+
 	if (isatty(STDIN_FILENO))
 		len = write(STDOUT_FILENO, &str_prompt, strlen(str_prompt));
 

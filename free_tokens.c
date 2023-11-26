@@ -5,11 +5,15 @@
  * @size: The size of the tokens array
  * Return: Noting
  */
-void free_tokens(char **tokens, int size)
+void free_tokens(char **tokens)
 {
-	int i;
+	char **tmp = tokens;
 
-	for (i = 0; i < size; i++)
-		free(tokens[i]);
+
+	while (*tmp)
+	{
+		free(*tmp);
+		tmp++;
+	}
 	free(tokens);
 }

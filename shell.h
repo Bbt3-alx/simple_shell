@@ -11,12 +11,11 @@
 
 int prompt(void);
 int print(const char *str);
-char *get_cmd(char **tokens, int i, char *p_token);
+char *get_cmd(char **tokens);
 
 char *_strcat(char *destination, char *source);
 int execute_cmd(int argc, char **argv);
-void free_tokens(char **tokens, int size);
-char **tokenize_input(char *line, int cmd_size);
-void read_cmd(char ***tokens, int *cmd_size, int *i);
+void free_tokens(char **tokens);
+char **tokenize_input();
 
 #endif /* SHELL */

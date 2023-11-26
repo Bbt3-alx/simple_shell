@@ -7,13 +7,11 @@
  */
 int print(const char *str)
 {
-	int len, len_write;
+	int len_write;
 
 	if (str == NULL)
 		return (0);
-
-	len = strlen(str);
-	len_write = write(STDOUT_FILENO, &str, len);
+	len_write = puts(str);
 
 	return (len_write);
 }
