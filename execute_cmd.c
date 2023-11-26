@@ -69,7 +69,7 @@ int execute_cmd(int __attribute__ ((unused)) argc, char **argv)
 
 		if (full_path == NULL)
 		{
-			/*fprintf(stderr, "%s: %d: %s: not found\n", argv[0], i, tokens[0]);*/
+			fprintf(stderr, "%s: %d: %s: not found\n", argv[0], i, tokens[0]);
 			free_tokens(tokens);
 			prompt();
 			return (1); /* Return an error code */
