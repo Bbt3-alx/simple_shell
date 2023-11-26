@@ -11,8 +11,6 @@ char *get_cmd(char **tokens)
 	struct stat st;
 	char *path_copy;
 
-		/* Iterate through PATH directories */
-	
 	/* Get a copy of the PATH variable */
 	path_copy = strdup(getenv("PATH"));
 	if (path_copy == NULL)
@@ -20,6 +18,17 @@ char *get_cmd(char **tokens)
 		perror("strdup");
 		free_tokens(tokens);
 		return (NULL);
+	}
+
+	/* Check if the command includes a directory path */
+	if (strchr(tokens[0], '/') != NULL)
+	{
+		/* Check if the file exists */
+		if (access(tokens[0], X_OK) == 0 && stat(tokens[0], &st) == 0)
+		{
+			free(path_copy);
+			return (strdup(tokens[0]));
+		}
 	}
 
 	path_token = strtok(path_copy, ":");

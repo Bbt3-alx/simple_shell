@@ -50,7 +50,7 @@ char **tokenize_input()
 			free_tokens(tokens);
 			return (NULL);
 		}
-		strcpy(tokens[i], token);
+		strncpy(tokens[i], token, strlen(token) + 1);
 		i++;
 		token = strtok(NULL, " ");
 	}
